@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Stapel';
+  src: url('../fonts/Stapel_Regular.woff2') format('woff2'),
+    url('../fonts/Stapel_Regular.woff') format('woff'),
+    url('../fonts/Stapel_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Stapel';
+  src: url('../fonts/Stapel-ExtraBold.woff2') format('woff2'),
+    url('../fonts/Stapel-ExtraBold.woff') format('woff'),
+    url('../fonts/Stapel-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('../fonts/HelveticaNeueCyr-Roman.woff2') format('woff2'),
+    url('../fonts/HelveticaNeueCyr-Roman.woff') format('woff'),
+    url('../fonts/HelveticaNeueCyr-Roman.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
