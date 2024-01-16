@@ -39,6 +39,13 @@ body {
   }
 }
 
+.main__landing {
+  background-color: var(--white-color);
+  background-image: url('../img/landing-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 // Animations
 // Fade

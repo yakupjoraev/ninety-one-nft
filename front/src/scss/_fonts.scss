@@ -10,6 +10,17 @@
 
 @font-face {
   font-family: 'Stapel';
+  src: url('../fonts/Stapel-Bold.woff2') format('woff2'),
+    url('../fonts/Stapel-Bold.woff') format('woff'),
+    url('../fonts/Stapel-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'Stapel';
   src: url('../fonts/Stapel-ExtraBold.woff2') format('woff2'),
     url('../fonts/Stapel-ExtraBold.woff') format('woff'),
     url('../fonts/Stapel-ExtraBold.ttf') format('truetype');
