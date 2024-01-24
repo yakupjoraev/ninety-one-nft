@@ -46,6 +46,24 @@ body {
   background-size: cover;
 }
 
+.main__dashboard {
+  background-color: #F7F9FE;
+}
+
+.dashboard__wrapper {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+
+  @media (max-width: $breakpoint1450) {
+    grid-template-columns: 240px 1fr;
+  }
+
+  @media (max-width: $breakpoint992) {
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+  }
+}
+
 
 // Animations
 // Fade

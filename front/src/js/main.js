@@ -1,8 +1,8 @@
 // Custom scripts
 // Мобильное меню бургер
 function burgerMenu() {
-  const burger = document.querySelector('.burger')
-  const menu = document.querySelector('.menu')
+  const burger = document.querySelector('.burger, .aside__burger')
+  const menu = document.querySelector('.menu, .aside__inner')
   const body = document.querySelector('body')
   burger.addEventListener('click', () => {
     if (!menu.classList.contains('active')) {
@@ -16,7 +16,7 @@ function burgerMenu() {
     }
   })
   //снять классы при клике на элементы меню
-  const menuItems = document.querySelectorAll('.menu__item')
+  const menuItems = document.querySelectorAll('.menu__item, .aside__nav-item')
 
   menuItems.forEach(item => {
     item.addEventListener('click', function () {
@@ -34,6 +34,7 @@ function burgerMenu() {
       body.classList.remove('locked')
     }
   })
+
 }
 burgerMenu()
 
@@ -51,3 +52,32 @@ function fixedNav() {
   }
 }
 window.addEventListener('scroll', fixedNav)
+
+
+function profileMob() {
+  const container = document.querySelector('.profile');
+
+  if (!container) {
+    return null
+  }
+
+  const profile = document.querySelector('[data-profile-mob]');
+  const profileContent = document.querySelector('[data-profile-mob-content]');
+  const profileClose = document.querySelector('[data-profile-mob-close]');
+
+  profile.addEventListener('click', () => {
+    profileContent.classList.add('active');
+  })
+
+  profileClose.addEventListener('click', () => {
+    profileContent.classList.remove('active');
+  })
+
+  document.addEventListener('click', (event) => {
+    if (!container.contains(event.target)) {
+      profileContent.classList.remove('active');
+    }
+  });
+}
+
+profileMob();

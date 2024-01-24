@@ -383,18 +383,23 @@
   // .verify__social-link
 
   &__social-link {
-    transition: transform 0.2s linear;
+
 
     @media (hover: hover) {
       &:hover {
-        transform: scale(1.1);
+        .verify__social-img {
+          transform: scale(1.6);
+
+        }
       }
     }
   }
 
   // .verify__social-img
 
-  &__social-img {}
+  &__social-img {
+    transition: transform 0.2s linear;
+  }
 }
 
 .verify__finally-pic {
