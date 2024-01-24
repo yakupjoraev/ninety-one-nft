@@ -85,3 +85,53 @@ function profileMob() {
 }
 
 profileMob();
+
+function modals() {
+  const container = document.querySelector('.modal');
+
+  if (!container) {
+    return null
+  }
+
+  const openModalBtns = document.querySelectorAll('.open-modal-btn');
+  const closeModalBtns = document.querySelectorAll('.close-modal-btn');
+  const modals = document.querySelectorAll('.modal');
+  const body = document.querySelector('body')
+
+  // Функция для закрытия всех модальных окон
+  function closeAllModals() {
+    modals.forEach(modal => {
+      modal.classList.remove('show');
+    });
+  }
+
+  openModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modalId = btn.dataset.modalId;
+      const modal = document.getElementById(modalId);
+
+      // Закрыть все открытые модальные окна
+      closeAllModals();
+
+      modal.classList.add('show');
+      body.classList.add('locked');
+    });
+  });
+
+  closeModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal');
+      modal.classList.remove('show');
+      body.classList.remove('locked');
+    });
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target.classList.contains('modal')) {
+      event.target.classList.remove('show');
+      body.classList.remove('locked');
+    }
+  });
+}
+
+modals();

@@ -1,9 +1,91 @@
 <!-- Modal -->
-<div class="modal__wrapper">
-    <div class="modal">
-        <div class="modal__close"> <img src="./img/cancel.svg" alt="cancel" width="10px" height="10px"></div>
-        <div class="modal__title"><span>Заголовок 2</span> </div>
-        <div class="modal__body">
-        </div>
+
+<div class="modal" id="send">
+  <div class="modal-content">
+    <button type="button" class="close-modal-btn">
+      <img src="./img/icons/close-modal.svg" alt="close-modal icon">
+    </button>
+
+    <div class="modal__header">
+      <h3 class="modal__title">Send</h3>
+
+      <div class="modal__qr">
+        <img width="160" height="160" src="./img/qr.png" alt="qr code pic">
+      </div>
     </div>
+
+    <form class="modal__form form" action="#">
+      <div class="form__group">
+        <label class="form__label" for="moda-input-1">Address</label>
+
+        <div class="form__input-wrapper form__input-wrapper--border">
+          <input class="form__input" type="text" id="moda-input-1" placeholder="Address"
+            value="0x99sdg4fg564hs8fgh7ss6f5gh4">
+        </div>
+      </div>
+
+      <div class="form__group">
+        <label class="form__label" for="moda-input-2">Amount</label>
+
+        <div class="form__input-wrapper form__input-wrapper--border">
+          <input class="form__input" type="number" id="moda-input-2" placeholder="Amount" value="100">
+
+          <div class="form__token">91COIN</div>
+        </div>
+      </div>
+
+      <div class="form__group">
+        <label class="form__label" for="moda-input-3">Fee</label>
+
+        <div class="form__input-wrapper form__input-wrapper--border">
+          <input class="form__input" type="number" id="moda-input-3" placeholder="Fee" value="0.1">
+
+          <div class="form__token">91COIN</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn--full">send</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="recive">
+  <div class="modal-content">
+    <button type="button" class="close-modal-btn">
+      <img src="./img/icons/close-modal.svg" alt="close-modal icon">
+    </button>
+
+    <div class="modal__header">
+      <h3 class="modal__title">Recive</h3>
+
+      <div class="modal__qr">
+        <img width="160" height="160" src="./img/qr.png" alt="qr code pic">
+      </div>
+    </div>
+
+    <form class="modal__form form" action="#">
+      <div class="form__group">
+        <label class="form__label" for="moda-input-4">Address</label>
+
+        <div class="form__input-wrapper form__input-wrapper--border">
+          <input class="form__input" type="text" id="moda-input-4" placeholder="Address"
+            value="0x99sdg4fg564hs8fgh7ss6f5gh4">
+          <button type="button" class="form__copy">
+            <img src="./img/icons/copy.svg" width="20" height="20" alt="copy icon">
+          </button>
+        </div>
+      </div>
+
+      <div class="form__group">
+        <label class="form__label" for="moda-input-5">Network Data</label>
+
+        <div class="form__input-wrapper form__input-wrapper--border">
+          <textarea class="form__input form__input--textarea" type="text" id="moda-input-5"
+            placeholder="Network Data">Eget tincidunt tristique urna in. Adipiscing integer tristique libero molestie dolor ante. Urna enim nulla ac porttitor maecenas. Odio duis tincidunt nec et dolor mattis ac facilisis tortor. Aenean nullam arcu quam tortor aliquet.</textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn--full">share</button>
+    </form>
+  </div>
 </div>

@@ -36,6 +36,11 @@ body {
 
   &.locked {
     overflow: hidden;
+    padding-right: 17px;
+
+    @media (max-width: $breakpoint992) {
+      padding-right: 0;
+    }
   }
 }
 

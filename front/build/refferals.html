@@ -198,194 +198,184 @@
     </div>
 
     <div class="dashboard__blocks">
-      <div class="dashboard__block dashboard__block--blue">
-        <img class="dashboard__block-img" width="100" height="48" src="./img/logo.svg" alt="logo icon">
+      <div class="dashboard__block dashboard__block--orange dashboard__block--row">
+        <img class="dashboard__block-img" width="196" height="196" src="./img/qr.png" alt="qr icon">
 
         <div class="dashboard__block-main">
           <div class="dashboard__block-column">
-            <h3 class="dashboard__block-label">Deposit Balance</h3>
-            <p class="dashboard__block-text"> 91 Coin</p>
+            <h3 class="dashboard__block-label">Invite Refferal</h3>
+            <p class="dashboard__block-text">
+              Consequat commodo morbi quis et egestas nunc nisl mi ac. Volutpat penatibus
+              a dui volutpat. Dolor gravida at quis volutpat orci. Adipiscing penatibus nascetur interdum at at non
+              mauris eu viverra. Nullam dictum erat nunc habitant morbi neque.
+            </p>
           </div>
 
-          <div class="dashboard__block-column">
-            <h3 class="dashboard__block-label dashboard__block-label--orange">124 </h3>
-            <a href="#" class="dashboard__block-text dashboard__block-text--orange">Show USDT</a>
+          <form class="form" action="#">
+            <div class="form__group">
+              <label class="form__label" for="moda-input-4">Referral Link</label>
+
+              <div class="form__input-wrapper form__input-wrapper--border">
+                <input class="form__input" type="text" id="moda-input-4" placeholder="Referral Link"
+                  value="0xP]cvx387SDSYOKE3qDs8547c854yLkcR75X">
+                <button type="button" class="form__copy">
+                  <img src="./img/icons/copy.svg" width="20" height="20" alt="copy icon">
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="dashboard__blocks-column">
+        <div class="dashboard__block dashboard__block--blue">
+          <div class="dashboard__block-main">
+            <div class="dashboard__block-column">
+              <h3 class="dashboard__block-label">Refferals</h3>
+              <p class="dashboard__block-text"> People</p>
+            </div>
+
+            <div class="dashboard__block-column">
+              <h3 class="dashboard__block-label dashboard__block-label--orange">132 </h3>
+              <a href="#" class="dashboard__block-text dashboard__block-text--orange">Full List</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard__block dashboard__block--purple">
+          <div class="dashboard__block-main">
+            <div class="dashboard__block-column">
+              <h3 class="dashboard__block-label">Received from Referral </h3>
+              <p class="dashboard__block-text"> 91 Coin</p>
+            </div>
+
+            <div class="dashboard__block-column">
+              <h3 class="dashboard__block-label dashboard__block-label--orange">91</h3>
+              <!-- <a href="#" class="dashboard__block-text dashboard__block-text--orange">Show USDT</a> -->
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="dashboard__block dashboard__block--purple">
-        <img class="dashboard__block-img" width="106" height="48" src="./img/icons/game.svg" alt="game icon">
-
-        <div class="dashboard__block-main">
-          <div class="dashboard__block-column">
-            <h3 class="dashboard__block-label">Received in game </h3>
-            <p class="dashboard__block-text"> 91 Coin</p>
-          </div>
-
-          <div class="dashboard__block-column">
-            <h3 class="dashboard__block-label dashboard__block-label--orange">50</h3>
-            <a href="#" class="dashboard__block-text dashboard__block-text--orange">Show USDT</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="dashboard__block dashboard__block--orange">
-        <img class="dashboard__block-img" width="78" height="54" src="./img/icons/rank-list.svg" alt="rank-list icon">
-
-        <div class="dashboard__block-main">
-          <div class="dashboard__block-column">
-            <h3 class="dashboard__block-label">Rank in Video List</h3>
-            <p class="dashboard__block-text"></p>
-          </div>
-
-          <div class="dashboard__block-column">
-            <h3 class="dashboard__block-label dashboard__block-label--orange">24</h3>
-            <a href="#" class="dashboard__block-text dashboard__block-text--orange">Full List</a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
   <div class="transition-history">
     <div class="content__head">
-      <h2 class="content__title">Transactions History</h2>
+      <h2 class="content__title">History of Referral Accruals</h2>
     </div>
 
     <div class="transition-history__main">
-      <ul class="transition-history__list">
+      <ul class="transition-history__list transition-history__list--5-column">
         <li class="transition-history__item transition-history__item--header">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <div class="transition-history__column">Date/Time</div>
-          <div class="transition-history__column transition-history__column--mob">Type</div>
-          <div class="transition-history__column transition-history__column--mob">Wallet/Address</div>
-          <div class="transition-history__column">User/System</div>
-          <div class="transition-history__column transition-history__column--mob">Amount</div>
+          <div class="transition-history__column transition-history__column--mob">Refferal</div>
+          <div class="transition-history__column">Amount</div>
+          <div class="transition-history__column transition-history__column--mob">Date/Time</div>
+          <div class="transition-history__column transition-history__column--mob">Line</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
 
         <li class="transition-history__item">
           <div class="transition-history__column">
             <img src="./img/icons/check.svg" alt="check icon">
           </div>
-          <a href="#" class="transition-history__column">Cell A</a>
-          <div class="transition-history__column transition-history__column--mob">Send</div>
-          <a href="#"
-            class="transition-history__column transition-history__column--mob">0xhe5sbhSTNx98xcv687SDSYOKE3qDs8wFv8</a>
-          <div class="transition-history__column">User</div>
-          <div class="transition-history__column transition-history__column--mob">Cell C</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">John Johnson</a>
+          <div class="transition-history__column">1 000</div>
+          <a href="#" class="transition-history__column transition-history__column--mob">15.01.2024 17:08</a>
+          <div class="transition-history__column transition-history__column--mob">1</div>
         </li>
-
       </ul>
     </div>
   </div>
