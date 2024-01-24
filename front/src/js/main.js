@@ -64,18 +64,22 @@ function profileMob() {
   const profile = document.querySelector('[data-profile-mob]');
   const profileContent = document.querySelector('[data-profile-mob-content]');
   const profileClose = document.querySelector('[data-profile-mob-close]');
+  const body = document.querySelector('body')
 
   profile.addEventListener('click', () => {
     profileContent.classList.add('active');
+    body.classList.add('locked')
   })
 
   profileClose.addEventListener('click', () => {
     profileContent.classList.remove('active');
+    body.classList.remove('locked')
   })
 
   document.addEventListener('click', (event) => {
     if (!container.contains(event.target)) {
       profileContent.classList.remove('active');
+      body.classList.remove('locked')
     }
   });
 }
