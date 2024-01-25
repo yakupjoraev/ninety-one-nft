@@ -1,0 +1,89 @@
+// ************************ Модальное окно ************************ //
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(209, 250, 255, 0.90);
+  opacity: 0;
+  animation: fade 0.2s linear;
+  transition: opacity 0.3s ease-in-out;
+
+
+  @media (max-width: $breakpoint992) {
+    z-index: 102;
+  }
+}
+
+.modal.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 600px;
+  width: 96%;
+  margin: auto;
+  padding: 40px 70px;
+  border-radius: 15px;
+  background-color: var(--white-color);
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+
+  @media (max-width: $breakpoint768) {
+    padding: 40px 20px;
+  }
+}
+
+.modal.show .modal-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+}
+
+
+.modal__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal__title {
+  line-height: 100%;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.modal__qr {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+
+  img {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.modal__form {}

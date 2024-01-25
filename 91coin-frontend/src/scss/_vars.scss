@@ -1,0 +1,33 @@
+// Container & Breakpoints
+@use 'sass:math';
+$containerWidth: 1760;
+$containerPadding: 40;
+$containerSidePadding: math.div($containerPadding, 2);
+$breakpoint1450: 1449.98+px;
+$breakpoint1200: 1199.98+px;
+$breakpoint992: 991.98+px;
+$breakpoint768: 767.98+px;
+$breakpoint480: 479.98+px;
+
+// Burger Menu
+$burgerBreakpoint: $breakpoint992;
+$burgerColor: 'black';
+$burgerActiveColor: 'white';
+
+:root {
+  //fonts
+  --primary-font: "Stapel", sans-serif;
+  --secondary-font: "Helvetica Neue", sans-serif;
+
+
+  //colors
+  --text-color: #343434;
+  --white-color: #ffffff;
+  --purple-color: #B69ECE;
+  --orange-color: #FD8778;
+  --sky-color: #0FBACE;
+
+
+  //gradinets
+  --btn-gradient: linear-gradient(90deg, #4E66E7 2.35%, #0FB4D4 24.81%, #C64D77 54.59%, #767DFC 76.07%, #FA7868 100%);
+}

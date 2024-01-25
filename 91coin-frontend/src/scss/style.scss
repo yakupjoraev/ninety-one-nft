@@ -1,0 +1,30 @@
+// Global SCSS-files imports
+@import './fonts';
+@import './vars';
+@import './reset';
+@import './global';
+
+// Basic SCSS-files imports
+@import './base';
+@import './keyframes';
+
+// Sections or Pages SCSS-files imports
+// @import './header';
+// @import './footer';
+
+@import './header';
+@import './landing';
+@import './verify';
+@import './footer-landing';
+
+
+@import './aside';
+@import './content';
+@import './profile';
+
+@import './form';
+@import './modal';
+
+
+// Libs
+// @import './libs/swiper';
