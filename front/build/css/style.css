@@ -720,6 +720,11 @@ body.locked {
   margin: 0 auto 40px;
 }
 
+.verify__main--center {
+  margin: auto auto;
+  padding: 20px 0;
+}
+
 .verify__steps {
   margin-bottom: 60px;
 }

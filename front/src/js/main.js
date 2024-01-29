@@ -1,7 +1,12 @@
 // Custom scripts
 // Мобильное меню бургер
 function burgerMenu() {
-  const burger = document.querySelector('.burger, .aside__burger')
+  const burger = document.querySelector('.burger, .aside__burger');
+
+  if (!burger) {
+    return null
+  }
+
   const menu = document.querySelector('.menu, .aside__inner')
   const body = document.querySelector('body')
   burger.addEventListener('click', () => {
@@ -135,3 +140,23 @@ function modals() {
 }
 
 modals();
+
+
+function loginBtn() {
+  const container = document.querySelector('.form');
+
+  if (!container) {
+    return null
+  }
+
+  const btn = document.querySelector('[data-login-btn]');
+
+  btn.addEventListener('click', () => {
+    // класс может понадобиться при валидации и тд. если не нужен - может убрать строку
+    btn.parentElement.classList.add('sended');
+
+    btn.textContent = "ENTER THE SITE";
+  })
+}
+
+loginBtn();
