@@ -1,4 +1,5 @@
 .hero {
+  overflow: hiddens;
   margin-top: 80px;
 
   @media (max-width: $breakpoint992) {
@@ -18,7 +19,7 @@
     justify-content: space-between;
     column-gap: 80px;
 
-    @media (max-width: $breakpoint992) {
+    @media (max-width: $breakpoint1200) {
       column-gap: 40px;
     }
 
@@ -85,6 +86,10 @@
     text-transform: uppercase;
     -webkit-text-stroke: 3px var(--white-color);
 
+    @media (max-width: $breakpoint1450) {
+      font-size: 8vw;
+    }
+
     @media (max-width: $breakpoint768) {
       font-size: 10vw;
       -webkit-text-stroke: 1px var(--white-color);
@@ -133,11 +138,15 @@
     grid-template-columns: repeat(2, 1fr);
     column-gap: 140px;
 
+    @media (max-width: 1600px) {
+      column-gap: 80px;
+    }
+
     @media (max-width: $breakpoint1450) {
       column-gap: 60px;
     }
 
-    @media (max-width: $breakpoint992) {
+    @media (max-width: $breakpoint1200) {
       column-gap: 40px;
     }
 
@@ -235,6 +244,15 @@
     max-width: 100%;
     width: 100%;
     height: 100%;
+    min-width: 272px;
+
+    @media (max-width: $breakpoint1200) {
+      min-width: 200px;
+    }
+
+    @media (max-width: $breakpoint992) {
+      min-width: 1px;
+    }
 
     @media (max-width: $breakpoint768) {
       max-height: 240px;
@@ -291,6 +309,22 @@
 
     display: flex;
 
+    @media (hover:hover) {
+      &:hover {
+        .token-heroes__picture:nth-child(1) {
+          transform: translate(4%, -4%);
+        }
+
+        .token-heroes__picture:nth-child(2) {
+          transform: translate(12%, -8%);
+        }
+
+        .token-heroes__picture:nth-child(3) {
+          transform: translate(16%, -10%);
+        }
+      }
+    }
+
     @media (max-width: $breakpoint768) {
       flex: 0 1 auto;
     }
@@ -299,6 +333,7 @@
   // .token-heroes__picture
 
   &__picture {
+    transition: transform 0.3s linear;
 
     &:nth-child(1) {
       z-index: 3;
