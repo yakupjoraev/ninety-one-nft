@@ -1,4 +1,4 @@
-export default function VerifyFooter () {
+const VerifyFooter: React.FunctionComponent = () => {
   return (
     <div className="verify__footer">
         <ul className="verify__socials">
@@ -48,3 +48,5 @@ export default function VerifyFooter () {
     </div>
   )
 }
+
+export default VerifyFooter

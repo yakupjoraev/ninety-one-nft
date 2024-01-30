@@ -2,7 +2,7 @@ import DashboardFooter from "../components/DashboardFooter";
 import DashboardSidebar from "../components/DashboardSidebar";
 import Profile from "../components/Profile";
 
-export default function Referral () {
+const Referral: React.FunctionComponent = () => {
   return (
     <div className="main__dashboard">
         <div className="dashboard__wrapper">
@@ -209,3 +209,5 @@ export default function Referral () {
     </div>
   )
 }
+
+export default Referral

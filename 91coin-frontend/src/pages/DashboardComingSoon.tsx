@@ -1,9 +1,9 @@
 import { useLocation } from "react-router";
 import DashboardSidebar from "../components/DashboardSidebar";
 import DashboardFooter from "../components/DashboardFooter";
-import ProfileBlock from "../components/Profile";
+import Profile from "../components/Profile";
 
-export default function DashboardComingSoon () {
+const DashboardComingSoon: React.FunctionComponent = () => {
     const location = useLocation()
 
     return (
@@ -32,8 +32,10 @@ export default function DashboardComingSoon () {
                     <DashboardFooter />
                 </div>
 
-                <ProfileBlock />
+                <Profile />
             </div>
         </div>
     )
 }
+
+export default DashboardComingSoon

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function DashboardSidebar () {
-    const [showSidebarMenu, setShowSidebarMenu] = useState(false)
+const DashboardSidebar: React.FunctionComponent = () => {
+    const [showSidebarMenu, setShowSidebarMenu] = useState<boolean>(false)
 
     return (
         <aside className="aside">
@@ -180,3 +180,5 @@ export default function DashboardSidebar () {
         </aside>
     )
 }
+
+export default DashboardSidebar

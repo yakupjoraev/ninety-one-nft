@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 
-export default function Header () {
+const Header: React.FunctionComponent = () => {
     const location = useLocation()
-    const [showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState<boolean>(false)
 
     useEffect(() => {
         if(showMenu) {
@@ -126,3 +126,5 @@ export default function Header () {
         </header>
     )
 }
+
+export default Header

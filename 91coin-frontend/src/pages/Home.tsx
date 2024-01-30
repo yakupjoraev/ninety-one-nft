@@ -2,7 +2,7 @@ import * as React from 'react'
 const Header = React.lazy(() => import('../components/Header'))
 const Footer = React.lazy(() => import('../components/Footer'))
 
-export default function Home () {
+const Home: React.FunctionComponent = () => {
   return (
     <div className="main__landing">
         <Header />
@@ -96,3 +96,5 @@ export default function Home () {
     </div>
   )
 }
+
+export default Home

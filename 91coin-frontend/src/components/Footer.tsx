@@ -1,11 +1,6 @@
-import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 
-export default function Footer () {
-    const location = useLocation()
-
-    if(location.pathname == '/verify') return <></>
-
+const Footer: React.FunctionComponent = () => {
     return (
         <footer className="footer-landing">
             <div className="container">
@@ -155,3 +150,5 @@ export default function Footer () {
         </footer>
   )
 }
+
+export default Footer

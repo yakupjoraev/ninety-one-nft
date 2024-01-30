@@ -2,7 +2,7 @@ import DashboardSidebar from "../components/DashboardSidebar";
 import DashboardFooter from "../components/DashboardFooter";
 import Profile from "../components/Profile";
 
-export default function Dashboard () {
+const Dashboard: React.FunctionComponent = () => {
   return (
     <div className="main__dashboard">
         <div className="dashboard__wrapper">
@@ -219,3 +219,5 @@ export default function Dashboard () {
     </div>
   )
 }
+
+export default Dashboard

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 
-export default function Profile () {
-    const [showProfile, setShowProfile] = useState(false)
-    const [showSendModal, setShowSendModal] = useState(false)
-    const [showReceiveModal, setShowReceiveModal] = useState(false)
+const Profile: React.FunctionComponent = () => {
+    const [showProfile, setShowProfile] = useState<boolean>(false)
+    const [showSendModal, setShowSendModal] = useState<boolean>(false)
+    const [showReceiveModal, setShowReceiveModal] = useState<boolean>(false)
 
     useEffect(() => {
         (showSendModal || showReceiveModal) && setShowProfile(false)
@@ -222,3 +222,5 @@ export default function Profile () {
     </>
   )
 }
+
+export default Profile

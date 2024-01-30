@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import VerifyFooter from '../components/VerifyFooter'
 
-export default function Login () {
+const Login: React.FunctionComponent = () => {
     return (
         <div className="verify-wrapper">
             <div className="verify-bg">
@@ -47,3 +47,5 @@ export default function Login () {
         </div>
     )
 }
+
+export default Login

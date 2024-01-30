@@ -2,15 +2,20 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import VerifyFooter from '../components/VerifyFooter'
 
-export default function Verify () {
-    const [step, setStep]: any = useState(1)
-    const stepPercents: any = {
+interface StepPercent {
+    [index: number]: string;
+}
+
+const Verify: React.FunctionComponent = () => {
+    const [step, setStep] = useState<number>(1)
+    const stepPercents: StepPercent = {
         1: '10%',
         2: '40%',
         3: '60%',
         4: '90%',
         5: '100%',
     }
+
     return (
         <div className="verify-wrapper">
             <div className="verify-bg">
@@ -168,3 +173,5 @@ export default function Verify () {
         </div>
     )
 }
+
+export default Verify

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function DashboardFooter () {
+const DashboardFooter: React.FunctionComponent = () => {
   return (
     <div className="content__footer">
         <Link to={'#'} className="content__footer-link">White paper</Link>
@@ -13,3 +13,5 @@ export default function DashboardFooter () {
     </div>
   )
 }
+
+export default DashboardFooter
