@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 const Home = React.lazy(() => import('./pages/Home'))
 const ComingSoon = React.lazy(() => import('./pages/ComingSoon'))
 const Verify = React.lazy(() => import('./pages/Verify'))
+const Login = React.lazy(() => import('./pages/Login'))
 const Dashboard = React.lazy(() => import('./pages/Dashboard'))
 const Referral = React.lazy(() => import('./pages/Referral'))
 const DashboardComingSoon = React.lazy(() => import('./pages/DashboardComingSoon'))
@@ -30,6 +31,9 @@ function App() {
               </React.Suspense>} />
             <Route path='verify' element={<React.Suspense>
                 <Verify />
+              </React.Suspense>} />
+            <Route path='login' element={<React.Suspense>
+                <Login />
               </React.Suspense>} />
             <Route path='dashboard'>
               <Route index element={<React.Suspense>

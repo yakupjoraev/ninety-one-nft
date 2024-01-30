@@ -155,7 +155,7 @@ export default function Verify () {
                                 verification. If you have any questions, <a href="#">contact support</a> or read the <a href="#">FAQ</a>
                                 </p>
 
-                                <form className="verify__form" action="/dashboard">
+                                <form className="verify__form" action="/login">
                                     <button type="submit" className="verify__form-btn btn">ENTER SITE</button>
                                 </form>
                             </>}
