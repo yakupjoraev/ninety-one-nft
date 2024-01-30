@@ -1,16 +1,7 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import VerifyFooter from '../components/VerifyFooter'
 
 export default function Login () {
-    const [step, setStep]: any = useState(1)
-    const stepPercents: any = {
-        1: '10%',
-        2: '40%',
-        3: '60%',
-        4: '90%',
-        5: '100%',
-    }
     return (
         <div className="verify-wrapper">
             <div className="verify-bg">
