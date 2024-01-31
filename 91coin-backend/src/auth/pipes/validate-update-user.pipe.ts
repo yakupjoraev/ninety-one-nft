@@ -1,5 +1,5 @@
 import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
-import { UpdateUserDto } from 'src/dtos/UpdateUser.dto';
+import { UpdateUserDto } from 'src/auth/dtos/UpdateUser.dto';
 
 @Injectable()
 export class ValidateUpdateUserPipe implements PipeTransform {
