@@ -13,7 +13,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
     TypeOrmModule.forRoot({
       type: 'mariadb',
       host: process.env.DATABASE_HOST,
-      port: parseInt(process.env.DATABASE_POST),
+      port: +process.env.DATABASE_POST,
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
@@ -23,7 +23,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
     MailerModule.forRoot({
       transport: {
         host: process.env.MAILER_HOST,
-        port: parseInt(process.env.MAILER_PORT),
+        port: +process.env.MAILER_PORT,
         auth: {
           user: process.env.MAILER_USER,
           pass: process.env.MAILER_PASS,
