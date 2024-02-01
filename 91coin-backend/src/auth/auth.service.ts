@@ -34,18 +34,19 @@ export class AuthService {
 
         try {
             const emailVerificationCode: string = generateRandomString(6)
-            const newUser = this.userRepository.create({
-                email: userDetails.email,
-                emailVerificationCode,
-                createdAt: new Date(),
-            })
-            await this.userRepository.save(newUser)
 
             await this.mailerService.sendMail({
                 to: userDetails.email,
                 subject: "Verification code",
                 html: `Verification code: <b>${emailVerificationCode}</b>`
             })
+
+            const newUser = this.userRepository.create({
+                email: userDetails.email,
+                emailVerificationCode,
+                createdAt: new Date(),
+            })
+            await this.userRepository.save(newUser)
 
             return {
                 message: 'Verification code sent to your email'
