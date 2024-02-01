@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/utils/typeorm/entities/User';
-import { CreateUserParams, LoginUserParams, UpdateUserParams } from 'src/utils/types';
+import { CreateUserParams, LoginParams, UpdateUserParams, VerifyEmailParams, VerifyPhoneParams } from 'src/utils/types';
 import { generateRandomNumber, generateRandomString } from 'src/utils/helpers';
 import { JwtService } from '@nestjs/jwt';
 
@@ -13,28 +13,28 @@ export class AuthService {
         private jwtService: JwtService,
     ) {}
 
-    async createUserViaEmail(userDetails: CreateUserParams) {
+    async createUserByEmail(userDetails: CreateUserParams) {
         const user: User = await this.userRepository.findOneBy({ email: userDetails.email })
 
-        if(user && user?.emailVerifiedAt) {
+        if(user?.emailVerifiedAt) {
             throw new HttpException(
                 'Email already verified',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
             )
         }
 
         if(user?.emailVerificationCode) {
             throw new HttpException(
                 'Verification code already sent to your email',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
             )
         }
 
-        const emailVerificationCode: string = generateRandomString(6)
-
         try {
+            const emailVerificationCode: string = generateRandomString(6)
+            // send verification code to email via nodemailer
             const newUser = this.userRepository.create({
-                ...userDetails,
+                email: userDetails.email,
                 emailVerificationCode,
                 createdAt: new Date(),
             })
@@ -42,6 +42,45 @@ export class AuthService {
 
             return {
                 message: 'Verification code sent to your email'
+            }
+        } catch (error) {
+            throw new HttpException(
+                'Something went wrong. Try again.',
+                HttpStatus.BAD_REQUEST
+            )
+        }
+    }
+
+    async verifyEmail(userDetails: VerifyEmailParams) {
+        const userByEmail: User = await this.userRepository.findOneBy({ email: userDetails.email })
+        if(!userByEmail) {
+            throw new HttpException(
+                'User not found',
+                HttpStatus.BAD_REQUEST
+            )
+        }
+
+        if(userByEmail?.emailVerifiedAt) {
+            throw new HttpException(
+                'Email already verified',
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
+            )
+        }
+
+        if(userByEmail?.emailVerificationCode.toLowerCase() !== userDetails?.emailVerificationCode?.toLowerCase()) {
+            throw new HttpException(
+                'Incorrect code',
+                HttpStatus.BAD_REQUEST
+            )
+        }
+
+        try {
+            await this.userRepository.update({ email: userDetails.email }, { 
+                emailVerificationCode: null, 
+                emailVerifiedAt: new Date() 
+            })
+            return {
+                message: 'Email successfully verified'
             }
         } catch (error) {
             throw new HttpException(
@@ -63,33 +102,26 @@ export class AuthService {
         if(!userByEmail?.emailVerifiedAt) {
             throw new HttpException(
                 'Please first verify your email',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
             )
         }
 
         if(userByEmail?.phoneVerifiedAt) {
             throw new HttpException(
                 'Phone already verified',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
             )
         }
 
         if(userByEmail?.phoneVerificationCode) {
             throw new HttpException(
                 `Verification code already sent to your phone ********${userByEmail?.phone?.substring(9)}`,
-                HttpStatus.BAD_REQUEST
-            )
-        }
-
-        if(userByEmail?.phone && userByEmail?.phone != userDetails.phone) {
-            throw new HttpException(
-                `The user previously used another phone with the ending ********${userByEmail?.phone?.substring(9)}`,
-                HttpStatus.BAD_REQUEST
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
             )
         }
 
         const userByPhone: User = await this.userRepository.findOneBy({ phone: userDetails.phone })
-        if(userByPhone && userByEmail.email != userByPhone?.email) {
+        if(userByPhone && userByEmail?.email != userByPhone?.email) {
             throw new HttpException(
                 'Phone already used by another user',
                 HttpStatus.BAD_REQUEST
@@ -98,10 +130,14 @@ export class AuthService {
 
         try {
             const phoneVerificationCode: string = generateRandomNumber(4)
-            await this.userRepository.update({ email: userDetails.email }, { phone: userDetails.phone, phoneVerificationCode })
+            // send verification code to phone via api https://mobizon.kz/
+            await this.userRepository.update({ email: userDetails.email }, { 
+                phone: userDetails.phone, 
+                phoneVerificationCode 
+            })
 
             return {
-                message: `Verification code sent to your phone ********${userByEmail?.phone?.substring(9)}`
+                message: `Verification code sent to your phone ********${userDetails.phone?.substring(9)}`
             }
         } catch (error) {
             throw new HttpException(
@@ -111,29 +147,85 @@ export class AuthService {
         }
     }
 
-    async login({ phone, phoneVerificationCode }: LoginUserParams) {
-        const userByPhone: User = await this.userRepository.findOneBy({ phone })
+    async verifyPhone(userDetails: VerifyPhoneParams) {
+        const userByPhone: User = await this.userRepository.findOneBy({ phone: userDetails.phone })
         if(!userByPhone) {
             throw new HttpException(
-                'User not exist',
+                'User not found',
                 HttpStatus.BAD_REQUEST
             )
         }
-        if(userByPhone?.status !== 'active') {
-            throw new HttpException(
-                'Inactive user',
-                HttpStatus.FORBIDDEN
-            )
-        }
-        if(userByPhone.phoneVerificationCode?.toLowerCase() !== phoneVerificationCode?.toLowerCase()) {
+        if(userByPhone.phoneVerificationCode?.toLowerCase() !== userDetails.phoneVerificationCode?.toLowerCase()) {
             throw new HttpException(
                 'Incorrect code',
                 HttpStatus.BAD_REQUEST
             )
         }
+        let message = 'Successfully logged in'
+        if(!userByPhone.phoneVerifiedAt) {
+            try {
+                await this.userRepository.update({ phone: userDetails.phone }, { 
+                    phoneVerificationCode: null, 
+                    phoneVerifiedAt: new Date(), 
+                    status: 'active' 
+                })
+                message = 'Phone successfully verified'
+            } catch (error) {
+                throw new HttpException(
+                    'Something went wrong. Try again.',
+                    HttpStatus.BAD_REQUEST
+                )
+            }
+        } else {
+            await this.userRepository.update({ phone: userDetails.phone }, { 
+                phoneVerificationCode: null 
+            })
+        }
         const payload = { phone: userByPhone.phone, id: userByPhone.id }
         return {
+            message,
             access_token: this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY })
+        }
+    }
+
+    async login(userDetails: LoginParams) {
+        const userByPhone: User = await this.userRepository.findOneBy({ phone: userDetails.phone })
+        if(!userByPhone) {
+            throw new HttpException(
+                'User not found',
+                HttpStatus.BAD_REQUEST
+            )
+        }
+
+        if(!userByPhone?.phoneVerifiedAt) {
+            throw new HttpException(
+                'Please first verify your phone',
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
+            )
+        }
+
+        if(userByPhone?.phoneVerificationCode) {
+            throw new HttpException(
+                `Verification code already sent to your phone ********${userByPhone?.phone?.substring(9)}`,
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
+            )
+        }
+
+        try {
+            const phoneVerificationCode: string = generateRandomNumber(4)
+            // send verification code to phone via api https://mobizon.kz/
+            await this.userRepository.update({ phone: userDetails.phone }, { 
+                phoneVerificationCode 
+            })
+
+            return {
+                message: `Verification code sent to your phone ********${userDetails.phone?.substring(9)}`
+            }
+        } catch (error) {
+            throw new HttpException(
+                'Something went wrong. Try again.',
+                HttpStatus.BAD_REQUEST
+            )
         }
     }
 

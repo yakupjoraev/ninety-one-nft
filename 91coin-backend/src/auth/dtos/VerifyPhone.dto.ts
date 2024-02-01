@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsPhoneNumber } from "class-validator";
 
-export class LoginUserDto {
+export class VerifyPhoneDto {
     @IsNotEmpty()
     @IsPhoneNumber('KZ', {
         message: 'Phone must be in KZ format'

@@ -1,11 +1,13 @@
 import { Body, Controller, Get, HttpStatus, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { CreateUserDto } from 'src/auth/dtos/CreateUser.dto';
-import { UpdateUserDto } from 'src/auth/dtos/UpdateUser.dto';
 import { ValidateUpdateUserPipe } from 'src/auth/pipes/validate-update-user.pipe';
 import { AuthService } from 'src/auth/auth.service';
-import { LoginUserDto } from './dtos/LoginUser.dto';
 import { AuthGuard } from './auth.guard';
+import { CreateUserDto } from './dtos/CreateUser.dto';
+import { VerifyEmailDto } from './dtos/VerifyEmail.dto';
+import { UpdateUserDto } from './dtos/UpdateUser.dto';
+import { VerifyPhoneDto } from './dtos/VerifyPhone.dto';
+import { LoginDto } from './dtos/Login.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -14,23 +16,33 @@ export class AuthController {
     ) {}
 
     @Post('register')
-    createUserViaEmail(@Body() createUserDto: CreateUserDto) {
-        return this.authService.createUserViaEmail({email: createUserDto.email})
+    createUserByEmail(@Body() createUserDto: CreateUserDto) {
+        return this.authService.createUserByEmail(createUserDto)
+    }
+
+    @Post('verify-email')
+    verifyEmail(@Body() verifyEmailDto: VerifyEmailDto) {
+        return this.authService.verifyEmail(verifyEmailDto)
     }
 
     @Put('register')
-    updateUserPhone(@Body(ValidateUpdateUserPipe) updateUserDto: UpdateUserDto) {
+    updateUserPhoneByEmail(@Body(ValidateUpdateUserPipe) updateUserDto: UpdateUserDto) {
         return this.authService.updateUserPhoneByEmail(updateUserDto)
     }
 
+    @Post('verify-phone')
+    verifyPhone(@Body(ValidateUpdateUserPipe) verifyPhoneDto: VerifyPhoneDto) {
+        return this.authService.verifyPhone(verifyPhoneDto)
+    }
+
     @Post('login')
-    login(@Body(ValidateUpdateUserPipe) loginUserDto: LoginUserDto) {
-        return this.authService.login(loginUserDto)
+    login(@Body(ValidateUpdateUserPipe) loginDto: LoginDto) {
+        return this.authService.login(loginDto)
     }
 
     @UseGuards(AuthGuard)
     @Get('status')
-    async status(@Req() req: Request, @Res() res: Response) {
+    status(@Req() req: Request, @Res() res: Response) {
         res.status(HttpStatus.OK).json({
             message: 'OK'
         })

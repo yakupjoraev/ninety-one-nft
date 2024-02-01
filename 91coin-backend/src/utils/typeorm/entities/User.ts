@@ -23,9 +23,6 @@ export class User {
     @Column({ nullable: true })
     phoneVerifiedAt: Date;
 
-    @Column({ nullable: true })
-    password: string;
-
     @Column({ default: 'inactive' })
     status: string;
 
