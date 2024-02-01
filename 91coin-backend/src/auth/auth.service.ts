@@ -5,12 +5,14 @@ import { User } from 'src/utils/typeorm/entities/User';
 import { CreateUserParams, LoginParams, UpdateUserParams, VerifyEmailParams, VerifyPhoneParams } from 'src/utils/types';
 import { generateRandomNumber, generateRandomString } from 'src/utils/helpers';
 import { JwtService } from '@nestjs/jwt';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class AuthService {
     constructor(
         @InjectRepository(User) private userRepository: Repository<User>,
         private jwtService: JwtService,
+        private readonly mailerService: MailerService,
     ) {}
 
     async createUserByEmail(userDetails: CreateUserParams) {
@@ -32,13 +34,18 @@ export class AuthService {
 
         try {
             const emailVerificationCode: string = generateRandomString(6)
-            // send verification code to email via nodemailer
             const newUser = this.userRepository.create({
                 email: userDetails.email,
                 emailVerificationCode,
                 createdAt: new Date(),
             })
             await this.userRepository.save(newUser)
+
+            await this.mailerService.sendMail({
+                to: userDetails.email,
+                subject: "Verification code",
+                html: `Verification code: <b>${emailVerificationCode}</b>`
+            })
 
             return {
                 message: 'Verification code sent to your email'
