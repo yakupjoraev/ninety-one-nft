@@ -229,13 +229,20 @@ export class AuthService {
 
         try {
             const phoneVerificationCode: string = generateRandomNumber(4)
-            // send verification code to phone via api https://mobizon.kz/
-            await this.userRepository.update({ phone: userDetails.phone }, { 
-                phoneVerificationCode 
-            })
 
-            return {
-                message: `Verification code sent to your phone ********${userDetails.phone?.substring(9)}`
+            const data = {
+                recipient: userDetails.phone,
+                text: `Verification code: ${phoneVerificationCode}`,
+            }
+            const response = await axios.post(`${process.env.SMS_API_URL}/service/Message/SendSmsMessage?apiKey=${process.env.SMS_API_KEY}`, data)
+            if(response.status == 200) {
+                await this.userRepository.update({ phone: userDetails.phone }, {
+                    phoneVerificationCode
+                })
+
+                return {
+                    message: `Verification code sent to your phone ********${userDetails.phone?.substring(9)}`
+                }
             }
         } catch (error) {
             throw new HttpException(
