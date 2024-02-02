@@ -72,6 +72,7 @@ export class AuthService {
 
     async verifyEmail(userDetails: VerifyEmailParams) {
         const userByEmail: User = await this.userRepository.findOneBy({ email: userDetails.email })
+
         if(!userByEmail) {
             throw new HttpException(
                 'User not found',
@@ -98,6 +99,7 @@ export class AuthService {
                 emailVerificationCode: null, 
                 emailVerifiedAt: new Date() 
             })
+
             return {
                 message: 'Email successfully verified'
             }
@@ -111,6 +113,7 @@ export class AuthService {
 
     async updateUserPhoneByEmail(userDetails: UpdateUserParams) {
         const userByEmail: User = await this.userRepository.findOneBy({ email: userDetails.email })
+
         if(!userByEmail) {
             throw new HttpException(
                 'User not found',
@@ -175,18 +178,28 @@ export class AuthService {
 
     async verifyPhone(userDetails: VerifyPhoneParams) {
         const userByPhone: User = await this.userRepository.findOneBy({ phone: userDetails.phone })
+
         if(!userByPhone) {
             throw new HttpException(
                 'User not found',
                 HttpStatus.BAD_REQUEST
             )
         }
+
+        if(userByPhone?.phoneVerifiedAt) {
+            throw new HttpException(
+                'Phone already verified',
+                HttpStatus.NON_AUTHORITATIVE_INFORMATION
+            )
+        }
+
         if(userByPhone.phoneVerificationCode?.toLowerCase() !== userDetails.phoneVerificationCode?.toLowerCase()) {
             throw new HttpException(
                 'Incorrect code',
                 HttpStatus.BAD_REQUEST
             )
         }
+
         let message = 'Successfully logged in'
         if(!userByPhone.phoneVerifiedAt) {
             try {
@@ -207,7 +220,9 @@ export class AuthService {
                 phoneVerificationCode: null 
             })
         }
+
         const payload = { phone: userByPhone.phone, id: userByPhone.id }
+
         return {
             message,
             access_token: this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY })
@@ -216,6 +231,7 @@ export class AuthService {
 
     async login(userDetails: LoginParams) {
         const userByPhone: User = await this.userRepository.findOneBy({ phone: userDetails.phone })
+
         if(!userByPhone) {
             throw new HttpException(
                 'User not found',
