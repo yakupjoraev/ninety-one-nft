@@ -33,6 +33,15 @@ export class AuthService {
             )
         }
 
+        let referrer = null
+        if(userDetails?.referrer) {
+            // const usersByReferrer: User[] = await this.userRepository.findBy({ referrer: userDetails.referrer })
+            const userByReferrer: User = await this.userRepository.findOneBy({ phone: userDetails.referrer })
+            if(userByReferrer) {
+                referrer = userDetails.referrer
+            }
+        }
+
         try {
             const emailVerificationCode: string = generateRandomString(6)
 
@@ -45,6 +54,7 @@ export class AuthService {
             const newUser = this.userRepository.create({
                 email: userDetails.email,
                 emailVerificationCode,
+                referrer,
                 createdAt: new Date(),
             })
             await this.userRepository.save(newUser)

@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ValidateUpdateUserPipe } from 'src/auth/pipes/validate-update-user.pipe';
+import { ValidateUserDetailsPipe } from 'src/auth/pipes/validate-user-details.pipe';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthGuard } from './auth.guard';
 import { CreateUserDto } from './dtos/CreateUser.dto';
@@ -16,7 +16,7 @@ export class AuthController {
     ) {}
 
     @Post('register')
-    createUserByEmail(@Body() createUserDto: CreateUserDto) {
+    createUserByEmail(@Body(ValidateUserDetailsPipe) createUserDto: CreateUserDto) {
         return this.authService.createUserByEmail(createUserDto)
     }
 
@@ -26,17 +26,17 @@ export class AuthController {
     }
 
     @Put('register')
-    updateUserPhoneByEmail(@Body(ValidateUpdateUserPipe) updateUserDto: UpdateUserDto) {
+    updateUserPhoneByEmail(@Body(ValidateUserDetailsPipe) updateUserDto: UpdateUserDto) {
         return this.authService.updateUserPhoneByEmail(updateUserDto)
     }
 
     @Post('verify-phone')
-    verifyPhone(@Body(ValidateUpdateUserPipe) verifyPhoneDto: VerifyPhoneDto) {
+    verifyPhone(@Body(ValidateUserDetailsPipe) verifyPhoneDto: VerifyPhoneDto) {
         return this.authService.verifyPhone(verifyPhoneDto)
     }
 
     @Post('login')
-    login(@Body(ValidateUpdateUserPipe) loginDto: LoginDto) {
+    login(@Body(ValidateUserDetailsPipe) loginDto: LoginDto) {
         return this.authService.login(loginDto)
     }
 

@@ -1,5 +1,6 @@
 export type CreateUserParams = {
     email: string;
+    referrer?: string;
 }
 
 export type VerifyEmailParams = {

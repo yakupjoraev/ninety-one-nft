@@ -23,6 +23,9 @@ export class User {
     @Column({ nullable: true })
     phoneVerifiedAt: Date;
 
+    @Column({ nullable: true })
+    referrer: string;
+
     @Column({ default: 'inactive' })
     status: string;
 
