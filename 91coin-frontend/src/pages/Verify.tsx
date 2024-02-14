@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import VerifyFooter from '../components/VerifyFooter'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { validateEmail, validatePhone } from '../utils/validations'
+import { createUserByEmail, updateUserPhoneByEmail, verifyEmail, verifyPhone } from '../apis/Auth'
+import cookies from '../services/cookies'
 
 interface StepPercent {
     [index: number]: string;
@@ -17,13 +20,92 @@ const Verify: React.FunctionComponent = () => {
         4: '90%',
         5: '100%',
     }
+    const [email, setEmail] = useState<string>('')
+    const [emailVerificationCode, setEmailVerificationCode] = useState<string>('')
+    const [phone, setPhone] = useState<string>('')
+    const [phoneVerificationCode, setPhoneVerificationCode] = useState<string>('')
 
-    useEffect(() => {
-        step == 2 && toast.info('info')
-        step == 3 && toast.success('success')
-        step == 4 && toast.warning('warning')
-        step == 5 && toast.error('error')
-    }, [step])
+    const handleEmail = async (e: FormEvent) => {
+        e.preventDefault()
+        if(!validateEmail(email)) {
+            toast.error('Please enter correct email')
+            return
+        }
+        const response = await createUserByEmail({email})
+        if(response.status == 201) {
+            toast.success(response.data?.message)
+            setStep(2)
+        }
+        if(response.status == 202) {
+            toast.error(response.data?.message)
+        }
+        if(response.status == 203) {
+            toast.warning(response.data?.message)
+            setStep(response.data?.message == 'Verification code already sent to your email' ? 2 : 3)
+        }
+    }
+
+    const handleEmailVerificationCode = async (e: FormEvent) => {
+        e.preventDefault()
+        if(!emailVerificationCode) {
+            toast.error('Please enter verification code')
+            return
+        }
+        const response = await verifyEmail({email, emailVerificationCode})
+        if(response.status == 201) {
+            toast.success(response.data?.message)
+            setStep(3)
+        }
+        if(response.status == 202) {
+            toast.error(response.data?.message)
+        }
+        if(response.status == 203) {
+            toast.warning(response.data?.message)
+        }
+    }
+
+    const handlePhone = async (e: FormEvent) => {
+        e.preventDefault()
+        if(!validatePhone(phone)) {
+            toast.error('Please enter correct phone')
+            return
+        }
+        const response = await updateUserPhoneByEmail({email, phone})
+        if(response.status == 200) {
+            toast.success(response.data?.message)
+            setStep(4)
+        }
+        if(response.status == 202) {
+            toast.error(response.data?.message)
+        }
+        if(response.status == 203) {
+            toast.warning(response.data?.message)
+            setStep(4)
+        }
+    }
+
+    const handlePhoneVerificationCode = async (e: FormEvent) => {
+        e.preventDefault()
+        if(!phoneVerificationCode) {
+            toast.error('Please enter verification code')
+            return
+        }
+        const response = await verifyPhone({phone, phoneVerificationCode})
+        if(response.status == 201) {
+            toast.success(response.data?.message)
+            cookies.set('access_token', response.data?.access_token)
+            setPhoneVerificationCode('')
+            setTimeout(() => {
+                window.location.replace('/dashboard')
+            }, 500)
+        }
+        if(response.status == 202) {
+            toast.error(response.data?.message)
+        }
+        if(response.status == 203) {
+            toast.warning(response.data?.message)
+        }
+    }
 
     return (
         <>
@@ -107,56 +189,56 @@ const Verify: React.FunctionComponent = () => {
                                     </p>
                                 </>}
 
-                                {step == 1 && <form className="verify__form form" action="#">
+                                {step == 1 && <form className="verify__form form" onSubmit={handleEmail}>
                                     <div className="form__group">
                                         <label className="form__label" htmlFor="input-1">E-mail</label>
 
                                         <div className="form__input-wrapper">
                                             <img className="form__icon" src="./img/icons/fluent_mail-20-filled.svg" alt="mail icon" />
-                                            <input className="form__input" type="email" id="input-1" placeholder="E-mail" />
+                                            <input className="form__input" type="email" id="input-1" placeholder="E-mail" value={email} onChange={e => setEmail(e.target?.value)} />
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="verify__form-btn btn" onClick={() => setStep(2)}>send code</button>
+                                    <button type="submit" className="verify__form-btn btn">send code</button>
                                 </form>}
 
-                                {step == 2 && <form className="verify__form form" action="#">
+                                {step == 2 && <form className="verify__form form" onSubmit={handleEmailVerificationCode}>
                                     <div className="form__group">
                                         <label className="form__label" htmlFor="input-2">Code</label>
 
                                         <div className="form__input-wrapper">
                                             <img className="form__icon" src="./img/icons/fluent_mail-20-filled.svg" alt="mail icon" />
-                                            <input className="form__input" type="password" id="input-2" placeholder="Code" />
+                                            <input className="form__input" type="password" id="input-2" placeholder="Code" value={emailVerificationCode} onChange={e => setEmailVerificationCode(e.target?.value)} />
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="verify__form-btn btn" onClick={() => setStep(3)}>send code</button>
+                                    <button type="submit" className="verify__form-btn btn">send code</button>
                                 </form>}
 
-                                {step == 3 && <form className="verify__form form" action="#">
+                                {step == 3 && <form className="verify__form form" onSubmit={handlePhone}>
                                     <div className="form__group">
                                         <label className="form__label" htmlFor="input-3">Phone</label>
 
                                         <div className="form__input-wrapper">
                                             <img className="form__icon" src="./img/icons/bi_phone-fill.svg" alt="tel icon" />
-                                            <input className="form__input" type="tel" id="input-3" placeholder="Phone" />
+                                            <input className="form__input" type="tel" id="input-3" placeholder="+77_________" value={phone} onChange={e => setPhone(e.target?.value)} />
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="verify__form-btn btn" onClick={() => setStep(4)}>send code</button>
+                                    <button type="submit" className="verify__form-btn btn">send code</button>
                                 </form>}
 
-                                {step == 4 && <form className="verify__form form" action="#">
+                                {step == 4 && <form className="verify__form form" onSubmit={handlePhoneVerificationCode}>
                                     <div className="form__group">
                                         <label className="form__label" htmlFor="input-3">Code</label>
 
                                         <div className="form__input-wrapper">
                                             <img className="form__icon" src="./img/icons/bi_phone-fill.svg" alt="tel icon" />
-                                            <input className="form__input" type="tel" id="input-3" placeholder="Code" />
+                                            <input className="form__input" type="tel" id="input-3" placeholder="Code" value={phoneVerificationCode} onChange={e => setPhoneVerificationCode(e.target?.value)} />
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="verify__form-btn btn" onClick={() => setStep(5)}>confirm phone</button>
+                                    <button type="submit" className="verify__form-btn btn">confirm phone</button>
                                 </form>}
                                 
                                 {step == 5 && <>
