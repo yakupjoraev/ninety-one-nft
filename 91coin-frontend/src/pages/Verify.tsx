@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import VerifyFooter from '../components/VerifyFooter'
 import { ToastContainer, toast } from 'react-toastify'
