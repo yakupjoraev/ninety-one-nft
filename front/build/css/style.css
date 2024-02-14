@@ -385,8 +385,30 @@ body.locked {
   cursor: pointer;
 }
 
+.nav__btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 24px;
+     -moz-column-gap: 24px;
+          column-gap: 24px;
+  margin-left: 20px;
+}
+
 .nav__btn {
   z-index: 23;
+}
+
+.nav__btn--transparent {
+  background: var(--white-color);
+  color: var(--sky-color);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff)) padding-box, -webkit-gradient(linear, left top, right top, color-stop(2.35%, #4E66E7), color-stop(24.81%, #0FB4D4), color-stop(54.59%, #C64D77), color-stop(76.07%, #767DFC), to(#FA7868)) border-box;
+  background: -o-linear-gradient(#fff, #fff) padding-box, -o-linear-gradient(left, #4E66E7 2.35%, #0FB4D4 24.81%, #C64D77 54.59%, #767DFC 76.07%, #FA7868 100%) border-box;
+  background: linear-gradient(#fff, #fff) padding-box, linear-gradient(90deg, #4E66E7 2.35%, #0FB4D4 24.81%, #C64D77 54.59%, #767DFC 76.07%, #FA7868 100%) border-box;
+  border: 2px solid transparent;
 }
 
 .hero {
@@ -2276,6 +2298,24 @@ body.locked {
     padding: 20px;
   }
 
+  .nav__btns {
+    margin-left: auto;
+  }
+
+  .nav__btn {
+    display: none;
+  }
+
+  .nav__btn--transparent {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 16px 50px;
+    background: var(--btn-gradient);
+    color: var(--white-color);
+    border: 0;
+  }
+
   .hero {
     margin-top: 60px;
   }
@@ -2716,6 +2756,13 @@ body.locked {
     width: -moz-fit-content;
     width: fit-content;
     padding: 20px;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .nav__btn--transparent {
+    width: 160px;
+    padding: 17px 20px;
     white-space: nowrap;
     font-size: 14px;
   }
