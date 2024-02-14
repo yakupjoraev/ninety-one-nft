@@ -19,6 +19,13 @@ export class AuthService {
     async createUserByEmail(userDetails: CreateUserParams) {
         const user: User = await this.userRepository.findOneBy({ email: userDetails.email })
 
+        if(user?.emailVerifiedAt && user?.phoneVerifiedAt) {
+            throw new HttpException(
+                'Email and Phone already verified',
+                HttpStatus.ACCEPTED
+            )
+        }
+
         if(user?.emailVerifiedAt) {
             throw new HttpException(
                 'Email already verified',
@@ -65,7 +72,7 @@ export class AuthService {
         } catch (error) {
             throw new HttpException(
                 'Something went wrong. Try again.',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
     }
@@ -76,7 +83,7 @@ export class AuthService {
         if(!userByEmail) {
             throw new HttpException(
                 'User not found',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
 
@@ -90,7 +97,7 @@ export class AuthService {
         if(userByEmail?.emailVerificationCode.toLowerCase() !== userDetails?.emailVerificationCode?.toLowerCase()) {
             throw new HttpException(
                 'Incorrect code',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
 
@@ -106,7 +113,7 @@ export class AuthService {
         } catch (error) {
             throw new HttpException(
                 'Something went wrong. Try again.',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
     }
@@ -117,7 +124,7 @@ export class AuthService {
         if(!userByEmail) {
             throw new HttpException(
                 'User not found',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
 
@@ -146,7 +153,7 @@ export class AuthService {
         if(userByPhone && userByEmail?.email != userByPhone?.email) {
             throw new HttpException(
                 'Phone already used by another user',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
 
@@ -171,7 +178,7 @@ export class AuthService {
         } catch (error) {
             throw new HttpException(
                 'Something went wrong. Try again.',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
     }
@@ -182,7 +189,7 @@ export class AuthService {
         if(!userByPhone) {
             throw new HttpException(
                 'User not found',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
 
@@ -196,7 +203,7 @@ export class AuthService {
         if(userByPhone.phoneVerificationCode?.toLowerCase() !== userDetails.phoneVerificationCode?.toLowerCase()) {
             throw new HttpException(
                 'Incorrect code',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
 
@@ -212,7 +219,7 @@ export class AuthService {
             } catch (error) {
                 throw new HttpException(
                     'Something went wrong. Try again.',
-                    HttpStatus.BAD_REQUEST
+                    HttpStatus.ACCEPTED
                 )
             }
         } else {
@@ -235,7 +242,7 @@ export class AuthService {
         if(!userByPhone) {
             throw new HttpException(
                 'User not found',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
 
@@ -273,7 +280,7 @@ export class AuthService {
         } catch (error) {
             throw new HttpException(
                 'Something went wrong. Try again.',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
     }
@@ -283,14 +290,14 @@ export class AuthService {
         if(!userDetails?.phone || !userDetails?.id) {
             throw new HttpException(
                 'Invalid token',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
         const user: User = await this.userRepository.findOneBy({ phone: userDetails.phone, id: userDetails.id })
         if(user?.status !== 'active') {
             throw new HttpException(
                 'Inactive user',
-                HttpStatus.BAD_REQUEST
+                HttpStatus.ACCEPTED
             )
         }
         return userDetails
