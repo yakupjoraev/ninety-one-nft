@@ -94,7 +94,8 @@ const Verify: React.FunctionComponent = () => {
         const response = await verifyPhone({phone, phoneVerificationCode})
         if(response.status == 201) {
             toast.success(response.data?.message)
-            cookies.set('access_token', response.data?.access_token)
+            const expires = new Date(new Date().getTime() + 1000*60*60*24*7)
+            cookies.set('access_token', response.data?.access_token, {expires})
             setPhoneVerificationCode('')
             setTimeout(() => {
                 window.location.replace('/dashboard')
