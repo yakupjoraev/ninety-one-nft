@@ -6,6 +6,7 @@ import cookies from '../services/cookies'
 import { FormEvent, useState } from 'react'
 import { validatePhone } from '../utils/validations'
 import { login, verifyPhone } from '../apis/Auth'
+import ReactInputMask from 'react-input-mask'
 
 const Login: React.FunctionComponent = () => {
     const [step, setStep] = useState<number>(1)
@@ -87,7 +88,8 @@ const Login: React.FunctionComponent = () => {
 
                                         <div className="form__input-wrapper">
                                             <img className="form__icon" src="./img/icons/bi_phone-fill.svg" alt="tel icon" />
-                                            <input className="form__input" type="tel" id="login-phone" placeholder="+77_________" value={phone} onChange={e => setPhone(e.target?.value)} />
+                                            {/* <input className="form__input" type="tel" id="login-phone" placeholder="+77_________" value={phone} onChange={e => setPhone(e.target?.value)} /> */}
+                                            <ReactInputMask className="form__input" type="tel" id="login-phone" mask="+\77999999999" maskPlaceholder="_" alwaysShowMask={true} value={phone} onChange={e => setPhone(e.target?.value)} />
                                         </div>
                                     </div>
 

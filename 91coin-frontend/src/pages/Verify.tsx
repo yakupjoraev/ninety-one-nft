@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { validateEmail, validatePhone } from '../utils/validations'
 import { createUserByEmail, updateUserPhoneByEmail, verifyEmail, verifyPhone } from '../apis/Auth'
 import cookies from '../services/cookies'
+import ReactInputMask from 'react-input-mask'
 
 interface StepPercent {
     [index: number]: string;
@@ -221,7 +222,8 @@ const Verify: React.FunctionComponent = () => {
 
                                         <div className="form__input-wrapper">
                                             <img className="form__icon" src="./img/icons/bi_phone-fill.svg" alt="tel icon" />
-                                            <input className="form__input" type="tel" id="input-3" placeholder="+77_________" value={phone} onChange={e => setPhone(e.target?.value)} />
+                                            {/* <input className="form__input" type="tel" id="input-3" placeholder="+77_________" value={phone} onChange={e => setPhone(e.target?.value)} /> */}
+                                            <ReactInputMask className="form__input" type="tel" id="input-3" mask="+\77999999999" maskPlaceholder="_" alwaysShowMask={true} value={phone} onChange={e => setPhone(e.target?.value)} />
                                         </div>
                                     </div>
 

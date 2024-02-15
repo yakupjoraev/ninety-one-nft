@@ -115,7 +115,11 @@ const Header: React.FunctionComponent = () => {
                             </li>
                         </ul>
 
-                        <Link to="/verify" className="btn nav__btn">recive wallet</Link>
+                        
+                        <div className="nav__btns">
+                            <Link to="/login" className="btn nav__btn nav__btn--transparent">login</Link>
+                            <Link to="/verify" className="btn nav__btn">recive wallet</Link>
+                        </div>
 
                         <div className={`burger ${showMenu ? 'active-burger' : ''}`} onClick={() => setShowMenu(!showMenu)}>
                             <span></span>

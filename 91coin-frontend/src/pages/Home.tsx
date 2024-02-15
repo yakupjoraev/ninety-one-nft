@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 const Header = React.lazy(() => import('../components/Header'))
 const Footer = React.lazy(() => import('../components/Footer'))
 
@@ -34,9 +35,18 @@ const Home: React.FunctionComponent = () => {
                             <div className="hero__icons-column">
                                 <img className="hero__logo" src="./img/hero/logo.svg" alt="logo icon" />
                             </div>
+                        </div>
+                    </div>
+
+                    <Link to="/verify" className="hero__btn btn">recive wallet</Link>
+
+                    <div className="hero__mob-decors">
+                        <img className="hero__mob-decor-1" src="./img/icons/Star 1.svg" alt="" />
+                        <img className="hero__mob-decor-2" src="./img/hero-mob-decor-2.png" alt="" />
+                        <img className="hero__mob-decor-3" src="./img/hero-mob-decor-3.png" alt="" />
+                        <img className="hero__mob-decor-4" src="./img/hero-mob-decor-4.svg" alt="" />
                     </div>
                 </div>
-            </div>
         </div>
 
         <div className="token-heroes">
