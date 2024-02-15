@@ -32,7 +32,13 @@ const Verify: React.FunctionComponent = () => {
             toast.error('Please enter correct email')
             return
         }
-        const response = await createUserByEmail({email})
+        let data: any = {email}
+
+        const params = new URLSearchParams(window.location.search)
+        const referrer = params.get('referrer')
+        if(validatePhone(referrer)) data = {...data, referrer}
+
+        const response = await createUserByEmail(data)
         if(response.status == 201) {
             toast.success(response.data?.message)
             setStep(2)
