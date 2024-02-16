@@ -422,6 +422,7 @@ body.locked {
 
 .hero__inner {
   position: relative;
+  z-index: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -438,6 +439,7 @@ body.locked {
 
 .hero__info {
   position: relative;
+  z-index: 1;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 1072px;
           flex: 0 1 1072px;
