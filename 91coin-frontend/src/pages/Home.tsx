@@ -27,14 +27,12 @@ const Home: React.FunctionComponent = () => {
 
                             <div className="hero__circkle">
                                 <div className="hero__circkle-center"></div>
-
                                 <img width="170" height="170" className="hero__circkle-pic" src="./img/hero/circle-text.svg" alt="circle-text icon" />
                             </div>
-                            </div>
+                        </div>
 
-                            <div className="hero__icons-column">
-                                <img className="hero__logo" src="./img/hero/logo.svg" alt="logo icon" />
-                            </div>
+                        <div className="hero__icons-column">
+                            <img className="hero__logo" src="./img/hero/logo.svg" alt="logo icon" />
                         </div>
                     </div>
 
@@ -47,6 +45,7 @@ const Home: React.FunctionComponent = () => {
                         <img className="hero__mob-decor-4" src="./img/hero-mob-decor-4.svg" alt="" />
                     </div>
                 </div>
+            </div>
         </div>
 
         <div className="token-heroes">
